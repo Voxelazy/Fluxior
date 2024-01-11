@@ -1,5 +1,9 @@
 #pragma once
 
+// 2D Audio //
+#include "Audio/Sound.hpp"
+#include "Audio/Music.hpp"
+
 // 2D Graphics //
 #include "Graphics/Window.hpp"
 #include "Graphics/Camera.hpp"
@@ -16,7 +20,3 @@
 
 // System //
 #include "System/Timer.hpp"
-
-// 2D Audio //
-#include "Audio/Sound.hpp"
-#include "Audio/Music.hpp"

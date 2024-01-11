@@ -35,7 +35,7 @@ namespace Sling
         // Renders Everything Displayed Inside The Window
         void Render(int r = 0, int g = 0, int b = 0, int a = 0);
 
-        // Exits and closes the window and all running functions.
+        // Closes the window and stops all running instances.
         void Close();
 
         // Where The Main Game Loop Happens
