@@ -1,4 +1,4 @@
-#include "../../include/System/Timer.hpp"
+#include "Slingshot/System/Timer.hpp"
 
 namespace Sling
 {

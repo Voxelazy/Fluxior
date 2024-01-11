@@ -1,4 +1,4 @@
-#include "../../include/Input/Mouse.hpp"
+#include "Slingshot/Input/Mouse.hpp"
 
 namespace Sling
 {

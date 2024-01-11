@@ -1,4 +1,4 @@
-#include "../../include/Audio/Sound.hpp"
+#include "Slingshot/Audio/Sound.hpp"
 
 namespace Sling
 {

@@ -1,4 +1,4 @@
-#include "../../include/Physics/Physics.hpp"
+#include "Slingshot/Physics/Physics.hpp"
 
 namespace GR
 {

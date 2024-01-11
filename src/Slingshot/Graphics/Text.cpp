@@ -1,4 +1,4 @@
-#include "../../include/Graphics/Text.hpp"
+#include "Slingshot/Graphics/Text.hpp"
 
 namespace Sling
 {

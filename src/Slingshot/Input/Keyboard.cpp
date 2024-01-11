@@ -1,4 +1,4 @@
-#include "../../include/Input/Keyboard.hpp"
+#include "Slingshot/Input/Keyboard.hpp"
 
 namespace Sling
 {

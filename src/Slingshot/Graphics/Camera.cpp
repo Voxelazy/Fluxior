@@ -1,4 +1,4 @@
-#include "../../include/Graphics/Camera.hpp"
+#include "Slingshot/Graphics/Camera.hpp"
 
 namespace Sling
 {
