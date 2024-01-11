@@ -9,6 +9,8 @@ namespace Sling
     class Camera
     {
     public:
+        Camera();
+        
         Camera(int cameraXPos, int cameraYPos, int cameraWidth, int cameraHeight);
         virtual ~Camera();
 

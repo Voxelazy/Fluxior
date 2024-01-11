@@ -2,7 +2,6 @@
 
 #include <chrono>
 #include <iostream>
-#include <memory>
 #include <thread>
 
 #include <SDL2/SDL.h>
@@ -18,28 +17,26 @@ namespace Sling
         // Default constructor
         Window();
 
-        // Simplified constructor
-        Window(const char *Title, int WindowWidth, int WindowHeight, const float FPS = 60.0f);
-        // Complete constructor with every parameter that the Create function has.
-        Window(const char *Title, int WindowWidth, int WindowHeight, int WorldWidth, int WorldHeight, WindowMode winMode = Shown, RendererMode renMode = AcceleratedVSync, const float FPS = 60.0f);
+        // Overloaded constructor with every parameter that the Create function has.
+        Window(const char *Title, int WindowWidth, int WindowHeight, WindowMode winMode = WindowMode::Shown, RendererMode renMode = RendererMode::AcceleratedVSync, const float FPS = 60.0f);
 
         // Destructor
         virtual ~Window();
 
-        // Declaring SDL_Renderer To Display Things On Screen
-        SDL_Renderer *Renderer;
-
         // Creates The Game Window
-        bool Create(const char *Title, int WindowWidth, int WindowHeight, int WorldWidth, int WorldHeight, WindowMode winMode, RendererMode renMode, const float FPS);
+        bool Create(const char *Title, int WindowWidth, int WindowHeight, WindowMode winMode, RendererMode renMode, const float FPS);
 
-        // Renders Everything Displayed Inside The Window
+        // Renders Everything Displayed Inside The Window.
         void Render(int r = 0, int g = 0, int b = 0, int a = 0);
 
         // Closes the window and stops all running instances.
         void Close();
 
-        // Where The Main Game Loop Happens
+        // Where The Main Game Loop Happens.
         bool IsOpen();
+
+        // Getter method for the Renderer.
+        SDL_Renderer *GetRenderer() const { return Renderer; }
 
         // Getter method for the deltaTime.
         float GetDeltaTime() const { return deltaTime; }
@@ -50,14 +47,11 @@ namespace Sling
         std::chrono::duration<float, std::milli> frameDelay;
         float deltaTime;
 
-        // Window modes
-        WindowMode windowMode;
-
-        // Renderer modes
-        RendererMode rendererMode;
-
         // Game Window
         SDL_Window *window;
+
+        // Declaring SDL_Renderer To Display Things On Screen.
+        SDL_Renderer *Renderer;
 
         // Game Event
         static inline SDL_Event Event;

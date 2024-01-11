@@ -2,6 +2,8 @@
 
 namespace Sling
 {
+    Sprite::Sprite() {}
+    
     Sprite::Sprite(const char *filePath, SDL_Renderer *ren)
     {
         SDL_QueryTexture(texture, NULL, NULL, &spriteRect.w, &spriteRect.h);

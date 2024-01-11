@@ -1,16 +1,14 @@
 #pragma once
 
-#include <SDL2/SDL.h>
-
 namespace Sling
 {
-    enum WindowMode
+    enum class WindowMode
     {   
-        Fullscreen = SDL_WINDOW_FULLSCREEN,
-        HighDPI = SDL_WINDOW_ALLOW_HIGHDPI,
-        Maximized = SDL_WINDOW_MAXIMIZED,
-        Minimized = SDL_WINDOW_MINIMIZED,
-        Resizable = SDL_WINDOW_RESIZABLE,
-        Shown = SDL_WINDOW_SHOWN,
+        Fullscreen = 1,
+        HighDPI = 8192,
+        Maximized = 128,
+        Minimized = 64,
+        Resizable = 32,
+        Shown = 4,
     };
 } // namespace Sling

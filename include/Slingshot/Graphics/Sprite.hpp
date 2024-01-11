@@ -17,7 +17,7 @@ namespace Sling
         void Create(const char *filePath, SDL_Renderer *ren);
         void SetPosAndSize(float xpos, float ypos, float width, float height);
         void CropFrame(int x, int y, int w, int h);
-        void RenderSprite(float angle = 0.0f, Flipped flip = None, SDL_FPoint *center = NULL);
+        void RenderSprite(float angle = 0.0f, Flipped flip = Flipped::None, SDL_FPoint *center = NULL);
         void RenderSpriteCamOBJ(int x, int y);
         void RenderSpriteCamBG(SDL_Rect *clip = nullptr);
 

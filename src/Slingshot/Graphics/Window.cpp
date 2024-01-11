@@ -2,19 +2,15 @@
 
 namespace Sling
 {
-    Window::Window(const char *Title, int WindowWidth, int WindowHeight, const float FPS)
-        : Renderer(nullptr), window(nullptr)
-    {
-        Create(Title, WindowWidth, WindowHeight, WindowWidth, WindowHeight, WindowMode::Shown, RendererMode::AcceleratedVSync, FPS);
-    }
+    Window::Window() : window(nullptr), Renderer(nullptr) {}
 
-    Window::Window(const char *Title, int WindowWidth, int WindowHeight, int WorldWidth, int WorldHeight, WindowMode winMode, RendererMode renMode, const float FPS)
+    Window::Window(const char *Title, int WindowWidth, int WindowHeight, WindowMode winMode, RendererMode renMode, const float FPS)
         : window(nullptr), Renderer(nullptr)
     {
-        Create(Title, WindowWidth, WindowHeight, WorldWidth, WorldHeight, winMode, renMode, FPS);
+        Create(Title, WindowWidth, WindowHeight, winMode, renMode, FPS);
     }
 
-    bool Window::Create(const char *Title, int WindowWidth, int WindowHeight, int WorldWidth, int WorldHeight, WindowMode winMode, RendererMode renMode, const float FPS)
+    bool Window::Create(const char *Title, int WindowWidth, int WindowHeight, WindowMode winMode, RendererMode renMode, const float FPS)
     {
         frameDelay = std::chrono::duration<float, std::milli>(1000.0f / FPS);
 
@@ -24,14 +20,14 @@ namespace Sling
         }
         else
         {
-            window = SDL_CreateWindow(Title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WindowWidth, WindowHeight, winMode);
+            window = SDL_CreateWindow(Title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WindowWidth, WindowHeight, static_cast<Uint32>(winMode));
             if (!window)
             {
                 SDL_Quit();
                 throw std::runtime_error("Slingshot Failed to Create Window: " + std::string(SDL_GetError()));
             }
 
-            Renderer = SDL_CreateRenderer(window, -1, renMode);
+            Renderer = SDL_CreateRenderer(window, -1, static_cast<Uint32>(renMode));
             if (!Renderer)
             {
                 SDL_DestroyWindow(window);

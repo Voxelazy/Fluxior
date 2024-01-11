@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 
 #include "../Enum/Key.hpp"
-#include "../Enum/KeyEvent.hpp"
+#include "../Enum/KeyCode.hpp"
 
 namespace Sling
 {

@@ -1,13 +1,11 @@
 #pragma once
 
-#include <SDL2/SDL.h>
-
 namespace Sling
 {
-    enum Flipped
+    enum class Flipped
     {
-        Horizontally = SDL_FLIP_HORIZONTAL,
-        None = SDL_FLIP_NONE,
-        Vertically = SDL_FLIP_VERTICAL,
+        Horizontally = 1,
+        None = 0,
+        Vertically = 2,
     };
 } // namespace Sling

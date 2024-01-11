@@ -37,7 +37,7 @@ namespace Sling
         return texture;
     }
 
-    Texture::~Texture() 
+    Texture::~Texture()
     {
         SDL_DestroyTexture(texture);
         IMG_Quit();

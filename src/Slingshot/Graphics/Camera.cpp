@@ -2,6 +2,8 @@
 
 namespace Sling
 {
+    Camera::Camera() {}
+    
     Camera::Camera(int cameraXPos, int cameraYPos, int cameraWidth, int cameraHeight)
         : shakeIntensity(0.0f), shakeDuration(0.0f), shakeTimer(0.0f), zoomFactor(1.0f), targetZoom(1.0f), zoomDuration(0.0f), zoomTimer(0.0f)
     {

@@ -12,9 +12,10 @@ namespace Sling
         Texture();
         virtual ~Texture();
 
-        SDL_Texture *texture;
-
         bool Verify();
         SDL_Texture *Load(const char *filePath, SDL_Renderer *ren);
+
+    protected:
+        SDL_Texture *texture;
     };
 }
