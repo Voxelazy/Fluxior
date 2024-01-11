@@ -125,7 +125,7 @@ namespace Sling
         pad8 = KeyToKeycode(Key::Pad8),
         pad9 = KeyToKeycode(Key::Pad9),
         pad0 = KeyToKeycode(Key::Pad0),
-        period = KeyToKeycode(Key::Period),
+        periodK = KeyToKeycode(Key::Period),
 
         application = KeyToKeycode(Key::Application),
         power = KeyToKeycode(Key::Power),
