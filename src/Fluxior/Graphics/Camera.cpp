@@ -2,25 +2,44 @@
 
 namespace flux
 {
+    /**
+     * @brief Default constructor.
+     */
     Camera::Camera() {}
-    
-    Camera::Camera(int cameraXPos, int cameraYPos, int cameraWidth, int cameraHeight)
-        : shakeIntensity(0.0f), shakeDuration(0.0f), shakeTimer(0.0f), zoomFactor(1.0f), targetZoom(1.0f), zoomDuration(0.0f), zoomTimer(0.0f)
-    {
-        position = {0, 0};
-        originalPosition = {0, 0};
-        targetPosition = {0, 0};
 
-        cam = new SDL_Rect{cameraXPos, cameraYPos, cameraWidth, cameraHeight};
+    /**
+     * @brief Constructor with the specified parameters.
+     * @param CameraXPos The x position of the camera.
+     * @param CameraYPos The y position of the camera.
+     * @param CameraWidth The width of the camera.
+     * @param CameraHeight The height of the camera.
+     */
+    Camera::Camera(int CameraXPos, int CameraYPos, int CameraWidth, int CameraHeight)
+    {
+        cam = new SDL_Rect{CameraXPos, CameraYPos, CameraWidth, CameraHeight};
     }
 
-    void Camera::Center(int x, int y, int width, int height, int windowWidth, int windowHeight)
+    /**
+     * @brief Centers the camera on the target.
+     * @param x The x position of the target.
+     * @param y The y position of the target.
+     * @param width The width of the target.
+     * @param height The height of the target.
+     * @param WindowWidth The width of the window.
+     * @param WindowHeight The height of the window.
+     */
+    void Camera::Center(int x, int y, int width, int height, int WindowWidth, int WindowHeight)
     {
-        cam->x = (x + width / 2) - windowWidth / 2;
-        cam->y = (y + height / 2) - windowHeight / 2;
+        cam->x = (x + width / 2) - WindowWidth / 2;
+        cam->y = (y + height / 2) - WindowHeight / 2;
     }
 
-    void Camera::KeepInBounds(int worldWidth, int worldHeight)
+    /**
+     * @brief Keeps the camera from clipping out of the game world.
+     * @param WorldWidth The width of the game world.
+     * @param WorldHeight The height of the game world.
+     */
+    void Camera::KeepInBounds(int WorldWidth, int WorldHeight)
     {
         // Keep the camera in bounds
         if (cam->x < 0)
@@ -31,74 +50,18 @@ namespace flux
         {
             cam->y = 0;
         }
-        if (cam->x > worldWidth - cam->w)
+        if (cam->x > WorldWidth - cam->w)
         {
-            cam->x = worldWidth - cam->w;
+            cam->x = WorldWidth - cam->w;
         }
-        if (cam->y > worldHeight - cam->h)
+        if (cam->y > WorldHeight - cam->h)
         {
-            cam->y = worldHeight - cam->h;
-        }
-    }
-
-    void Camera::UpdateShake(float deltaTime)
-    {
-        // Update camera shake effect
-        if (shakeTimer > 0.0f)
-        {
-            float offsetX = (rand() % 200 - 100) * shakeIntensity;
-            float offsetY = (rand() % 200 - 100) * shakeIntensity;
-            position.x = originalPosition.x + offsetX;
-            position.y = originalPosition.y + offsetY;
-            shakeTimer -= deltaTime;
-            if (shakeTimer <= 0.0f)
-            {
-                position = originalPosition; // Reset position
-            }
+            cam->y = WorldHeight - cam->h;
         }
     }
 
-    void Camera::UpdateZoom(float deltaTime)
-    {
-        // Update camera zoom effect
-        if (zoomTimer > 0.0f)
-        {
-            float lerpFactor = 1.0f - (zoomTimer / zoomDuration);
-            zoomFactor = originalZoom + (targetZoom - originalZoom) * lerpFactor;
-            zoomTimer -= deltaTime;
-            if (zoomTimer <= 0.0f)
-            {
-                zoomFactor = targetZoom; // Reset zoom factor
-            }
-        }
-    }
-
-    void Camera::Shake(float intensity, float duration)
-    {
-        shakeIntensity = intensity;
-        shakeDuration = duration;
-        shakeTimer = duration;
-        originalPosition = position;
-    }
-
-    void Camera::Zoom(float factor, float duration)
-    {
-        targetZoom = factor;
-        originalZoom = zoomFactor;
-        zoomDuration = duration;
-        zoomTimer = duration;
-    }
-
-    SDL_Rect Camera::ApplyTransform(const SDL_Rect &rect) const
-    {
-        SDL_Rect transformedRect;
-        transformedRect.x = static_cast<int>(rect.x * zoomFactor) - position.x;
-        transformedRect.y = static_cast<int>(rect.y * zoomFactor) - position.y;
-        transformedRect.w = static_cast<int>(rect.w * zoomFactor);
-        transformedRect.h = static_cast<int>(rect.h * zoomFactor);
-
-        return transformedRect;
-    }
-
+    /**
+     * @brief Destructor.
+     */
     Camera::~Camera() {}
-}
+} // namespace flux

@@ -72,16 +72,16 @@ namespace flux
 
     /**
      * @brief Sets the position and size of the sprite.
-     * @param xpos The x position of the sprite.
-     * @param ypos The y position of the sprite.
+     * @param xPos The x position of the sprite.
+     * @param yPos The y position of the sprite.
      * @param width The width of the sprite.
      * @param height The height of the sprite.
      */
-    void Sprite::SetPosAndSize(float xpos, float ypos, float width, float height)
+    void Sprite::SetPosAndSize(float xPos, float yPos, float width, float height)
     {
         // Set the axis rectangle
         axisRect = {
-            xpos, ypos, width, height};
+            xPos, yPos, width, height};
     }
 
     /**
@@ -96,7 +96,18 @@ namespace flux
         SDL_RenderCopyExF(renderer, objTexture, &spriteRect, &axisRect, angle, center, static_cast<SDL_RendererFlip>(flip));
     }
 
-    void Sprite::RenderSpriteCamOBJ(int x, int y)
+    /**
+     * @brief Renders a sprite that does not follow the camera's movements.
+     *
+     * This function should only be used if there is a camera.
+     *
+     * @param x The x-coordinate of the target sprite.
+     * @param y The y-coordinate of the target sprite.
+     * @param angle The angle of rotation.
+     * @param flip The flip mode.
+     * @param center The point around which sprite will be rotated.
+     */
+    void Sprite::RenderNonFollowSprite(int x, int y, float angle, FlipMode flip, SDL_FPoint *center)
     {
         // Check if renderer exists
         if (renderer)
@@ -106,22 +117,32 @@ namespace flux
             axisRect.y -= y;
 
             // Render the sprite
-            SDL_RenderCopyF(renderer, objTexture, &spriteRect, &axisRect);
+            SDL_RenderCopyExF(renderer, objTexture, &spriteRect, &axisRect, angle, center, static_cast<SDL_RendererFlip>(flip));
         }
     }
 
-    void Sprite::RenderSpriteCamBG(SDL_Rect *clip)
+    /**
+     * @brief Renders a sprite that represents the game world or background.
+     *
+     * This function should only be used for rendering background or game world sprites in games with a camera.
+     *
+     * @param cam The camera's viewport of the Camera class.
+     * @param angle The angle of rotation.
+     * @param flip The flip mode.
+     * @param center The point around which sprite will be rotated.
+     */
+    void Sprite::RenderWorldSprite(SDL_Rect *cam, float angle, FlipMode flip, SDL_FPoint *center)
     {
-        // Check if clip exists
-        if (clip != NULL)
+        // Check if cam exists
+        if (cam != nullptr)
         {
             // Set the axis rectangle width and height
-            axisRect.w = clip->w;
-            axisRect.h = clip->h;
+            axisRect.w = cam->w;
+            axisRect.h = cam->h;
         }
 
         // Render the sprite
-        SDL_RenderCopyExF(renderer, objTexture, clip, &axisRect, 0.0, NULL, SDL_FLIP_NONE);
+        SDL_RenderCopyExF(renderer, objTexture, cam, &axisRect, angle, center, static_cast<SDL_RendererFlip>(flip));
     }
 
     /**
@@ -135,4 +156,4 @@ namespace flux
         // Quit IMG
         IMG_Quit();
     }
-} // namespace Sling
+} // namespace flux

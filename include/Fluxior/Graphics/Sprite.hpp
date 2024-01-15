@@ -5,28 +5,6 @@
 namespace flux
 {
     /**
-     * @enum FlipMode
-     * @brief Enum class for different flip modes.
-     */
-    enum class FlipMode
-    {
-        None = 0,         ///< No flip.
-        Horizontally = 1, ///< Flip horizontally.
-        Vertically = 2,   ///< Flip vertically.
-    };
-
-    /**
-     * @enum ScaleMode
-     * @brief Enum class for different scale modes.
-     */
-    enum class ScaleMode
-    {
-        Nearest = 0, ///< Nearest pixel sampling.
-        Linear = 1,  ///< Linear filtering (supported by OpenGL and Direct3D).
-        Best = 2,    ///< Anisotropic filtering (supported by Direct3D).
-    };
-
-    /**
      * @class Sprite
      * @brief Class for creating and managing a sprite.
      */
@@ -51,6 +29,24 @@ namespace flux
         virtual ~Sprite();
 
         /**
+         * @brief Gets the sprite's axis rectangle.
+         * @return The sprite's axis rectangle.
+         */
+        SDL_FRect GetAxisRect() const { return axisRect; }
+
+        /**
+         * @brief Gets the sprite's frame width.
+         * @return The sprite's frame width.
+         */
+        float GetFrameWidth() const { return frameWidth; }
+
+        /**
+         * @brief Gets the sprite's frame height.
+         * @return The sprite's frame height.
+         */
+        float GetFrameHeight() const { return frameHeight; }
+
+        /**
          * @brief Creates a sprite with the specified parameters.
          * @param filePath The file path of the sprite.
          * @param ren The renderer.
@@ -68,12 +64,12 @@ namespace flux
 
         /**
          * @brief Sets the position and size of the sprite.
-         * @param xpos The x position of the sprite.
-         * @param ypos The y position of the sprite.
+         * @param xPos The x position of the sprite.
+         * @param yPos The y position of the sprite.
          * @param width The width of the sprite.
          * @param height The height of the sprite.
          */
-        void SetPosAndSize(float xpos, float ypos, float width, float height);
+        void SetPosAndSize(float xPos, float yPos, float width, float height);
 
         /**
          * @brief Sets the texture scale mode of the sprite.
@@ -87,10 +83,32 @@ namespace flux
          * @param flip The flip mode.
          * @param center The point around which sprite will be rotated.
          */
-        void RenderSprite(float angle = 0.0f, FlipMode flip = FlipMode::None, SDL_FPoint *center = NULL);
+        void RenderSprite(float angle = 0.0f, FlipMode flip = FlipMode::None, SDL_FPoint *center = nullptr);
 
-        void RenderSpriteCamOBJ(int x, int y);
-        void RenderSpriteCamBG(SDL_Rect *clip = nullptr);
+        /**
+         * @brief Renders a sprite that does not follow the camera's movements.
+         *
+         * This function should only be used if there is a camera.
+         *
+         * @param x The x-coordinate of the target sprite.
+         * @param y The y-coordinate of the target sprite.
+         * @param angle The angle of rotation.
+         * @param flip The flip mode.
+         * @param center The point around which sprite will be rotated.
+         */
+        void RenderNonFollowSprite(int x, int y, float angle = 0.0f, FlipMode flip = FlipMode::None, SDL_FPoint *center = nullptr);
+
+        /**
+         * @brief Renders a sprite that represents the game world or background.
+         *
+         * This function should only be used for rendering background or game world sprites in games with a camera.
+         *
+         * @param cam The camera's viewport of the Camera class.
+         * @param angle The angle of rotation.
+         * @param flip The flip mode.
+         * @param center The point around which sprite will be rotated.
+         */
+        void RenderWorldSprite(SDL_Rect *cam = nullptr, float angle = 0.0f, FlipMode flip = FlipMode::None, SDL_FPoint *center = nullptr);
 
     private:
         SDL_Texture *objTexture; ///< The SDL texture.
@@ -103,4 +121,4 @@ namespace flux
         float originX, originY; ///< The origin of the sprite.
         int radius;             ///< The radius of the sprite.
     };
-} // namespace Sling
+} // namespace flux

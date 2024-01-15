@@ -6,47 +6,59 @@
 
 namespace flux
 {
+    /**
+     * @class Camera
+     * @brief A class that represents a camera in a 2D game world.
+     */
     class Camera
     {
     public:
+        /**
+         * @brief Default constructor.
+         */
         Camera();
-        
-        Camera(int cameraXPos, int cameraYPos, int cameraWidth, int cameraHeight);
+
+        /**
+         * @brief Constructor with the specified parameters.
+         * @param CameraXPos The x position of the camera.
+         * @param CameraYPos The y position of the camera.
+         * @param CameraWidth The width of the camera.
+         * @param CameraHeight The height of the camera.
+         */
+        Camera(int CameraXPos, int CameraYPos, int CameraWidth, int CameraHeight);
+
+        /**
+         * @brief Destructor.
+         */
         virtual ~Camera();
 
-        // The Camera..
-        SDL_Rect *cam;
+        /**
+         * @brief Getter method for the camera's viewport.
+         */
+        SDL_Rect *GetCam() { return cam; }
 
-        // Center the Camera on the target
-        void Center(int x, int y, int width, int height, int windowWidth, int windowHeight);
+        /**
+         * @brief Centers the camera on the target.
+         * @param x The x position of the target.
+         * @param y The y position of the target.
+         * @param width The width of the target.
+         * @param height The height of the target.
+         * @param WindowWidth The width of the window.
+         * @param WindowHeight The height of the window.
+         */
+        void Center(int x, int y, int width, int height, int WindowWidth, int WindowHeight);
 
-        // Keeps the Camera from clipping out of the game world
-        void KeepInBounds(int worldWidth, int worldHeight);
-
-        // Updates the Camera shake effect
-        void UpdateShake(float deltaTime);
-
-        // Updates the Camera zoom effect
-        void UpdateZoom(float deltaTime);
-
-        void Shake(float intensity, float duration);
-        void Zoom(float factor, float duration);
-
-        SDL_Rect ApplyTransform(const SDL_Rect &rect) const;
+        /**
+         * @brief Keeps the camera from clipping out of the game world.
+         * @param WorldWidth The width of the game world.
+         * @param WorldHeight The height of the game world.
+         */
+        void KeepInBounds(int WorldWidth, int WorldHeight);
 
     private:
-        float shakeIntensity;
-        float shakeDuration;
-        float shakeTimer;
-
-        float zoomFactor;
-        float targetZoom;
-        float zoomDuration;
-        float zoomTimer;
-        float originalZoom;
-
-        SDL_Point position;
-        SDL_Point originalPosition;
-        SDL_Point targetPosition;
+        /**
+         * @brief An SDL_Rect structure that represents the camera's viewport.
+         */
+        SDL_Rect *cam;
     };
-}
+} // namespace flux

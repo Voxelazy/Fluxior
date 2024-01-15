@@ -25,4 +25,4 @@ namespace flux
     }
 
     Keyboard::~Keyboard() {}
-}
+} // namespace flux
