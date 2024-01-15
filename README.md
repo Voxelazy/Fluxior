@@ -2,6 +2,7 @@
 an easy-to-use C++ framework for creating 2D games.
 
 # Example usage
+This code snippet creates a blank window and a simple game loop.
 ```
 #include "Fluxior/Graphics/Window.hpp"
 
