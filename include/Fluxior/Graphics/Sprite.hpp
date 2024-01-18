@@ -17,16 +17,16 @@ namespace flux
         Sprite();
 
         /**
+         * @brief Destructor.
+         */
+        virtual ~Sprite();
+
+        /**
          * @brief Constructor to create a sprite with specified parameters.
          * @param filePath The file path of the sprite.
          * @param ren The renderer.
          */
         Sprite(const char *filePath, SDL_Renderer *ren);
-
-        /**
-         * @brief Destructor.
-         */
-        virtual ~Sprite();
 
         /**
          * @brief Gets the sprite's axis rectangle.
@@ -90,8 +90,8 @@ namespace flux
          *
          * This function should only be used if there is a camera.
          *
-         * @param x The x-coordinate of the target sprite.
-         * @param y The y-coordinate of the target sprite.
+         * @param x The x-coordinate of the camera's viewport.
+         * @param y The y-coordinate of the camera's viewport.
          * @param angle The angle of rotation.
          * @param flip The flip mode.
          * @param center The point around which sprite will be rotated.

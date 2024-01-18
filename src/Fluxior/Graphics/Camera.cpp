@@ -8,6 +8,16 @@ namespace flux
     Camera::Camera() {}
 
     /**
+     * @brief Destructor.
+     */
+    Camera::~Camera()
+    {
+        delete cam;
+        
+        cam = nullptr;
+    }
+
+    /**
      * @brief Constructor with the specified parameters.
      * @param CameraXPos The x position of the camera.
      * @param CameraYPos The y position of the camera.
@@ -59,9 +69,4 @@ namespace flux
             cam->y = WorldHeight - cam->h;
         }
     }
-
-    /**
-     * @brief Destructor.
-     */
-    Camera::~Camera() {}
 } // namespace flux

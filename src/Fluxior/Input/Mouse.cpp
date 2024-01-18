@@ -16,6 +16,11 @@ namespace flux
     }
 
     /**
+     * @brief Destructor.
+     */
+    Mouse::~Mouse() {}
+
+    /**
      * @brief Updates the state of the mouse buttons and the mouse position.
      */
     void Mouse::Update()
@@ -84,9 +89,4 @@ namespace flux
     {
         return y;
     }
-
-    /**
-     * @brief Destructor.
-     */
-    Mouse::~Mouse() {}
 }

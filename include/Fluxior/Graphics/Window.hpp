@@ -78,6 +78,11 @@ namespace flux
         Window();
 
         /**
+         * @brief Destructor.
+         */
+        virtual ~Window();
+
+        /**
          * @brief Constructor to create a window with specified parameters.
          * @param Title The title of the window.
          * @param WindowWidth The width of the window.
@@ -87,23 +92,6 @@ namespace flux
          * @param FPS The frames per second.
          */
         Window(const char *Title, uint WindowWidth, uint WindowHeight, WindowMode WinMode = WindowMode::Shown, RendererMode RenMode = RendererMode::AcceleratedVSync, const float FPS = 60.0f);
-
-        /**
-         * @brief Destructor.
-         */
-        virtual ~Window();
-
-        /**
-         * @brief Gets the delta time variable.
-         * @return The delta time.
-         */
-        float GetDeltaTime() const { return deltaTime; }
-
-        /**
-         * @brief Gets the renderer.
-         * @return The renderer.
-         */
-        SDL_Renderer *GetRenderer() const { return renderer.get(); }
 
         /**
          * @brief The type of the current event.
@@ -121,6 +109,18 @@ namespace flux
          * each time it is called.
          */
         KeyCode Keycode;
+
+        /**
+         * @brief Gets the delta time variable.
+         * @return The delta time.
+         */
+        float GetDeltaTime() const { return deltaTime; }
+
+        /**
+         * @brief Gets the renderer.
+         * @return The renderer.
+         */
+        SDL_Renderer *GetRenderer() const { return renderer.get(); }
 
         /**
          * @brief Creates a window with the specified parameters.

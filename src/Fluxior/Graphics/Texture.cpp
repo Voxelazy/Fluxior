@@ -8,6 +8,15 @@ namespace flux
     Texture::Texture() : texture(nullptr) {}
 
     /**
+     * @brief Destructor for the Texture class.
+     */
+    Texture::~Texture()
+    {
+        SDL_DestroyTexture(texture);
+        IMG_Quit();
+    }
+
+    /**
      * @brief Verifies the initialization of various image formats.
      * @return true if all formats are initialized successfully, false otherwise.
      * @throws std::runtime_error if an image format fails to initialize.
@@ -45,14 +54,5 @@ namespace flux
         texture = IMG_LoadTexture(ren, filePath);
 
         return texture;
-    }
-
-    /**
-     * @brief Destructor for the Texture class.
-     */
-    Texture::~Texture()
-    {
-        SDL_DestroyTexture(texture);
-        IMG_Quit();
     }
 }

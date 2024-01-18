@@ -10,6 +10,8 @@ namespace flux
         Started = false;
     }
 
+    Timer::~Timer() {}
+
     void Timer::Start()
     {
         if (!Started)
@@ -80,6 +82,4 @@ namespace flux
     {
         return Paused && Started;
     }
-
-    Timer::~Timer() {}
 }

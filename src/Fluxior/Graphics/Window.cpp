@@ -11,6 +11,15 @@ namespace flux
     }
 
     /**
+     * @brief Destructor.
+     */
+    Window::~Window()
+    {
+        // Close the window
+        Close();
+    }
+
+    /**
      * @brief Constructor to create a window with specified parameters.
      * @param Title The title of the window.
      * @param WindowWidth The width of the window.
@@ -249,14 +258,5 @@ namespace flux
         // Quit SDL & SDL2_image
         IMG_Quit();
         SDL_Quit();
-    }
-
-    /**
-     * @brief Destructor.
-     */
-    Window::~Window()
-    {
-        // Close the window
-        Close();
     }
 } // namespace flux

@@ -4,6 +4,8 @@ namespace flux
 {
     Keyboard::Keyboard() {}
 
+    Keyboard::~Keyboard() {}
+
     bool Keyboard::IsDown(Key KeyDown)
     {
         KeyboardState = SDL_GetKeyboardState(nullptr);
@@ -23,6 +25,4 @@ namespace flux
         KeyboardState = SDL_GetKeyboardState(nullptr);
         return (KeyboardState[static_cast<int>(KeyReleased)] == 0) && (prevKeyboardState[static_cast<int>(KeyReleased)] != 0);
     }
-
-    Keyboard::~Keyboard() {}
 } // namespace flux

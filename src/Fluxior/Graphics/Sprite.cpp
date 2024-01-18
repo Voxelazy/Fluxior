@@ -8,6 +8,18 @@ namespace flux
     Sprite::Sprite() {}
 
     /**
+     * @brief Destructor.
+     */
+    Sprite::~Sprite()
+    {
+        // Destroy the texture
+        SDL_DestroyTexture(objTexture);
+
+        // Quit IMG
+        IMG_Quit();
+    }
+
+    /**
      * @brief Constructor to create a sprite with specified parameters.
      * @param filePath The file path of the sprite.
      * @param ren The renderer.
@@ -101,8 +113,8 @@ namespace flux
      *
      * This function should only be used if there is a camera.
      *
-     * @param x The x-coordinate of the target sprite.
-     * @param y The y-coordinate of the target sprite.
+     * @param x The x-coordinate of the camera's viewport.
+     * @param y The y-coordinate of the camera's viewport.
      * @param angle The angle of rotation.
      * @param flip The flip mode.
      * @param center The point around which sprite will be rotated.
@@ -143,17 +155,5 @@ namespace flux
 
         // Render the sprite
         SDL_RenderCopyExF(renderer, objTexture, cam, &axisRect, angle, center, static_cast<SDL_RendererFlip>(flip));
-    }
-
-    /**
-     * @brief Destructor.
-     */
-    Sprite::~Sprite()
-    {
-        // Destroy the texture
-        SDL_DestroyTexture(objTexture);
-
-        // Quit IMG
-        IMG_Quit();
     }
 } // namespace flux
